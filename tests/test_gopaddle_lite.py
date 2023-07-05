@@ -10,8 +10,8 @@ from utils import (
 
 class TestGoPaddleLite(object):
     @pytest.mark.skipif(
-        platform.machine() != "x86_64",
-        reason="gopaddle-lite tests are only relevant in x86 architectures",
+        platform.machine() == "s390x",
+        reason="gopaddle-lite tests are only relevant in x86 and arm64 architectures",
     )
     def test_gopaddle_lite(self):
         """
