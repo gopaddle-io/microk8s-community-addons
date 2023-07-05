@@ -186,9 +186,10 @@ enable_gopaddle_lite() {
     
     echo ""
     echo ""
-    echo "gopaddle lite is enabled"
+    # echo "gopaddle lite is enabled"
+    # echo ""
+    echo "gopaddle lite is enabled. Please wait for 10-15 minutes for gopaddle services to move to READY state."
     echo ""
-    echo "gopaddle lite access endpoint"
     if [ $STATICIP ]
     then
         echo "http://$STATICIP:30003"
@@ -204,10 +205,10 @@ enable_gopaddle_lite() {
     fi
 
     echo ""
-    echo ""
-    echo "gopaddle lite deployment will take several minutes to move to ready state."
-    echo ""
-    echo "microk8s.kubectl wait --for=condition=ready pod -l released-by=gopaddle -n gp-lite --timeout=15m"
+    # echo ""
+    # echo "gopaddle lite deployment will take several minutes to move to ready state."
+    # echo ""
+    # echo "microk8s.kubectl wait --for=condition=ready pod -l released-by=gopaddle -n gp-lite --timeout=15m"
 
 }
 
