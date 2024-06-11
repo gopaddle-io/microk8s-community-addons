@@ -172,9 +172,9 @@ def wait_for_namespace_termination(namespace, timeout_insec=360):
         time.sleep(10)
 
 
-def microk8s_enable(addon, timeout_insec=300):
+def microk8s_enable(addon, timeout_insec=300, optional_args=None):
     """
-    Disable an addon
+    Enable an addon
 
     Args:
         addon: name of the addon
@@ -188,13 +188,13 @@ def microk8s_enable(addon, timeout_insec=300):
             print("Not a cuda capable system. Will not test gpu addon")
             raise CalledProcessError(1, "Nothing to do for gpu")
 
-    cmd = "/snap/bin/microk8s.enable {}".format(addon)
+    cmd = "/snap/bin/microk8s.enable {} {}".format(addon, optional_args or "")
     return run_until_success(cmd, timeout_insec)
 
 
 def microk8s_disable(addon):
     """
-    Enable an addon
+    Disable an addon
 
     Args:
         addon: name of the addon

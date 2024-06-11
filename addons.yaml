@@ -1,6 +1,14 @@
 microk8s-addons:
   description: "List of all addons included in Microk8s."
   addons:
+    - name: "microcks"
+      description: "Open source Kubernetes Native tool for API Mocking and Testing"
+      version: "1.7.1"
+      check_status: "deployment.apps/microcks"
+      supported_architectures:
+        - arm64
+        - amd64
+
     - name: "dashboard-ingress"
       description: "Ingress definition for Kubernetes dashboard"
       version: "1.0.0"
@@ -11,7 +19,7 @@ microk8s-addons:
 
     - name: "istio"
       description: "Core Istio service mesh services"
-      version: "1.10.3"
+      version: "1.18.2"
       check_status: "${SNAP_DATA}/bin/istioctl"
       supported_architectures:
         - amd64
@@ -43,7 +51,7 @@ microk8s-addons:
 
     - name: "linkerd"
       description: "Linkerd is a service mesh for Kubernetes and other frameworks"
-      version: "2.11.3"
+      version: "2.14.3"
       check_status: "pod/linkerd-destination"
       supported_architectures:
         - amd64
@@ -51,11 +59,12 @@ microk8s-addons:
 
     - name: "cilium"
       description: "SDN, fast with full network policy"
-      version: "1.10"
+      version: "1.13.4"
       check_status: "pod/cilium"
       confinement: "classic"
       supported_architectures:
         - amd64
+        - arm64
 
     - name: "multus"
       description: "Multus CNI enables attaching multiple network interfaces to pods"
@@ -77,22 +86,23 @@ microk8s-addons:
     - name: "portainer"
       description: "Portainer UI for your Kubernetes cluster"
       version: "2.0.0"
-      check_status: "pod/portainer"
+      check_status: "deployment.apps/portainer "
       supported_architectures:
         - arm64
         - amd64
 
     - name: "traefik"
-      description: "traefik Ingress controller for external access"
-      version: "2.5.0"
-      check_status: "pod/traefik"
+      description: "traefik Ingress controller"
+      version: "2.9.6"
+      check_status: "deployment.apps/traefik"
       supported_architectures:
         - arm64
         - amd64
+        - s390x
 
     - name: "keda"
       description: "Kubernetes-based Event Driven Autoscaling"
-      version: "2.6.1"
+      version: "2.12.0"
       check_status: "pod/keda-operator"
       supported_architectures:
         - amd64
@@ -127,19 +137,20 @@ microk8s-addons:
       supported_architectures:
         - amd64
 
-    - name: "starboard"
-      description: "Kubernetes-native security toolkit"
-      version: "0.14.1"
-      check_status: "deployment.apps/starboard-operator"
+    - name: "trivy"
+      description: "Kubernetes-native security scanner"
+      version: "0.15.1"
+      check_status: "deployment.apps/trivy-operator"
       supported_architectures:
         - arm64
         - amd64
 
     - name: "argocd"
       description: "Argo CD is a declarative continuous deployment for Kubernetes."
-      version: "2.3.3"
+      version: "2.7.2"
       check_status: "deployment.apps/argo-cd-argocd-server"
       supported_architectures:
+        - arm64
         - amd64
 
     - name: "osm-edge"
@@ -150,10 +161,93 @@ microk8s-addons:
         - amd64
         - arm64
 
-    - name: "gopaddle-lite"
-      description: "Cheapest, fastest and simplest way to modernize your applications"
-      version: "4.2.4"
-      check_status: "deployment.apps/gateway"
+    - name: "sosivio"
+      description: "Kubernetes Predictive Troubleshooting, Observability, and Resource Optimization"
+      version: "1.7.1"
+      check_status: "deployment.apps/sosivio-dashboard"
       supported_architectures:
         - amd64
 
+    - name: "kwasm"
+      description: "WebAssembly support for WasmEdge (Docker Wasm) and Spin (Azure AKS WASI)"
+      version: "0.2.0"
+      check_status: "deployment.apps/kwasm-operator"
+      confinement: "classic"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "gopaddle"
+      description: "DevSecOps and Multi-Cloud Kubernetes Platform"
+      version: "4.2.9"
+      check_status: "deployment.apps/gateway"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "parking"
+      description: "Static webserver to park a domain. Works with EasyHAProxy."
+      version: "0.1.0"
+      check_status: "deployment.apps/parking-static-httpserver"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "easyhaproxy"
+      description: "EasyHAProxy can configure HAProxy automatically based on ingress labels"
+      version: "0.1.5"
+      check_status: "pod/ingress-easyhaproxy"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "shifu"
+      description: "Kubernetes native IoT software development framework."
+      version: "0.11.0"
+      check_status: "deployment.apps/shifu-crd-controller-manager"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "kubearmor"
+      description: "Cloud-native runtime security enforcement system for k8s"
+      version: "0.10.2"
+      check_status: "daemonset.apps/kubearmor"
+      confinement: "classic"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "falco"
+      description: "Cloud-native runtime threat detection tool for Linux and K8s"
+      version: "3.7.1"
+      check_status: "daemonset.apps/falco"
+      supported_architectures:
+        - amd64
+        - arm64
+
+    - name: "cloudnative-pg"
+      description: "PostgreSQL operator CloudNativePG"
+      version: "0.0.1"
+      check_status: "deployment.apps/cnpg-controller-manager"
+      confinement: "classic"
+      supported_architectures:
+        - arm64
+        - amd64
+
+    - name: "ngrok"
+      description: "ngrok Ingress Controller instantly adds connectivity, load balancing, authentication, and observability to your services"
+      version: "0.0.1"
+      check_status: "deployment.apps/ngrok-ingress-controller-kubernetes-ingress-controller-manager"
+      confinement: "classic"
+      supported_architectures:
+        - arm64
+        - amd64
+
+    - name: "stunner"
+      description: "A Kubernetes media gateway for WebRTC"
+      version: "0.0.1"
+      check_status: "deployment.apps/stunner-gateway-operator-controller-manager"
+      supported_architectures:
+        - arm64
+        - amd64
